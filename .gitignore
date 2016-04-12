@@ -4,6 +4,7 @@ Servers/
 .classpath
 .project
 .settings/
+.recommenders/
 
 # Intellij
 .idea/
