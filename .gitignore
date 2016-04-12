@@ -6,6 +6,9 @@ Servers/
 .settings/
 .recommenders/
 
+# Java
+*/bin/
+
 # Intellij
 .idea/
 *.iml
