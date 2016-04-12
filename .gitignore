@@ -1,10 +1,18 @@
-*.class
+# Eclipse
+Servers/
+.metadata
+.classpath
+.project
+.settings/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Intellij
+.idea/
+*.iml
+*.iws
 
-# Package Files #
-*.jar
-*.war
-*.ear
+# Mac
+.DS_Store
 
+# Maven
+*/log/
+*/target/
