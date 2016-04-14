@@ -1,7 +1,4 @@
-package com.aggregatorlibrary.implementations;
-
-import com.aggregatorlibrary.interfaces.Aggregator;
-import com.aggregatorlibrary.interfaces.Parameter;
+package com.aggregatorlibrary;
 
 public class AggregatorService implements Aggregator {
 

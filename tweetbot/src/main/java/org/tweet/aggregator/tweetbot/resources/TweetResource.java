@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 import org.tweet.aggregator.tweetbot.model.Tweet;
 import org.tweet.aggregator.tweetbot.tasks.StoreTweetInDynamoDB;
 
-import com.aggregatorlibrary.interfaces.Aggregator;
-import com.aggregatorlibrary.implementations.AggregatorService;
+import com.aggregatorlibrary.Aggregator;
+import com.aggregatorlibrary.AggregatorService;
 
 @Path("/tweet")
 public class TweetResource {

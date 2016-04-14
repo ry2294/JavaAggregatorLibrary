@@ -1,4 +1,4 @@
-package com.aggregatorlibrary.interfaces;
+package com.aggregatorlibrary;
 
 public interface Aggregator {
 	public void addParameter(Parameter parameter);
