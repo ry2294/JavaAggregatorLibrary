@@ -10,7 +10,7 @@ import org.tweet.aggregator.tweetbot.model.Tweet;
 import org.tweet.aggregator.tweetbot.tasks.StoreTweetInDynamoDB;
 
 import com.aggregatorlibrary.Aggregator;
-import com.aggregatorlibrary.AggregatorService;
+import com.aggregatorlibrary.Aggregators;
 
 @Path("/tweet")
 public class TweetResource {
@@ -18,7 +18,7 @@ public class TweetResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createTweet(Tweet tweet) {
-		Aggregator aggregator = new AggregatorService();
+		Aggregator aggregator = Aggregators.newAggregatorService();
 		aggregator.execute();
 		System.out.println("Tweet id = " + tweet.getId());
 		StoreTweetInDynamoDB storeTweetTask = new StoreTweetInDynamoDB();

@@ -1,6 +1,14 @@
 package com.aggregatorlibrary;
 
-public class AggregatorService implements Aggregator {
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+
+class AggregatorService implements Aggregator {
+	ConcurrentHashMap<Class<? extends Runnable>, Task> graph;
+	
+	public AggregatorService() {
+		graph = new ConcurrentHashMap<Class<? extends Runnable>, Task>();
+	}
 
 	@Override
 	public void addParameter(Parameter parameter) {
@@ -12,6 +20,7 @@ public class AggregatorService implements Aggregator {
 
 	@Override
 	public void execute() {
+		Executors.newFixedThreadPool(1);
 	}
 
 }
