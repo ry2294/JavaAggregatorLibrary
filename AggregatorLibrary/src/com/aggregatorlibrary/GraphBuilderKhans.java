@@ -1,12 +1,10 @@
 package com.aggregatorlibrary;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.aggregatorlibrary.exceptions.CyclicGraphException;
 
 class GraphBuilderKhans {
 
-	public static void buildGraph(ConcurrentHashMap<Class<? extends Runnable>, Task> graph) 
+	public static void buildGraph(Graph graph) 
 			throws CyclicGraphException {
 		injectDependecies(graph);
 		constructEdges(graph);
@@ -14,15 +12,15 @@ class GraphBuilderKhans {
 			throw new CyclicGraphException();
 	}
 	
-	private static void injectDependecies(ConcurrentHashMap<Class<? extends Runnable>, Task> graph) {
-		
+	private static void injectDependecies(Graph graph) {
 	}
 	
-	private static void constructEdges(ConcurrentHashMap<Class<? extends Runnable>, Task> graph) {
-		
+	private static void constructEdges(Graph graph) {
 	}
 	
-	private static boolean isGraphCyclic(ConcurrentHashMap<Class<? extends Runnable>, Task> graph) {
+	private static boolean isGraphCyclic(Graph graph) {
 		return false;
 	}
+	
+	private GraphBuilderKhans() {}
 }

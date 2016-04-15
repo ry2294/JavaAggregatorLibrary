@@ -1,5 +1,5 @@
 package com.aggregatorlibrary;
 
 interface GraphExecutor {
-	public void execute();
+	public void execute(Graph graph);
 }

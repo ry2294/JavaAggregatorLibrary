@@ -1,13 +1,10 @@
 package com.aggregatorlibrary;
 
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.Executors;
-
 class AggregatorService implements Aggregator {
-	ConcurrentHashMap<Class<? extends Runnable>, Task> graph;
+	Graph graph;
 	
 	public AggregatorService() {
-		graph = new ConcurrentHashMap<Class<? extends Runnable>, Task>();
+		graph = new Graph();
 	}
 
 	@Override
@@ -20,7 +17,9 @@ class AggregatorService implements Aggregator {
 
 	@Override
 	public void execute() {
-		Executors.newFixedThreadPool(1);
+		GraphBuilderKhans.buildGraph(graph);
+		GraphExecutor graphExecutor = GraphExecutors.newCachedThreadPool();
+		graphExecutor.execute(graph);
 	}
 
 }
