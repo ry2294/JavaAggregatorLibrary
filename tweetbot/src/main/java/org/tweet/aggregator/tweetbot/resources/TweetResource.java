@@ -7,6 +7,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.tweet.aggregator.tweetbot.model.Tweet;
+import org.tweet.aggregator.tweetbot.tasks.SentimentAnalysis;
 import org.tweet.aggregator.tweetbot.tasks.StoreTweetInDynamoDB;
 
 import com.aggregatorlibrary.Aggregator;
@@ -20,8 +21,10 @@ public class TweetResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createTweet(Tweet tweet) {
 		StoreTweetInDynamoDB storeTweetTask = new StoreTweetInDynamoDB();
+		SentimentAnalysis analysis = new SentimentAnalysis();
 		Aggregator aggregator = Aggregators.newAggregatorService();
 		aggregator.addParameter(new String("Dynamo DB"));
+		aggregator.addNode(analysis);
 		aggregator.addNode(storeTweetTask);
 		try {
 			aggregator.execute();

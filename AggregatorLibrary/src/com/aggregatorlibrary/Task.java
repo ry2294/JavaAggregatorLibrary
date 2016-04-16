@@ -16,9 +16,17 @@ class Task<K extends Runnable> {
 	public HashSet<Class<? extends Runnable>> getInDegree() {
 		return inDegree;
 	}
+	
+	public void addInDegree(Class<? extends Runnable> cls) {
+		inDegree.add(cls);
+	}
 
 	public HashSet<Class<? extends Runnable>> getOutDegree() {
 		return outDegree;
+	}
+	
+	public void addOutDegree(Class<? extends Runnable> cls) {
+		outDegree.add(cls);
 	}
 
 	public K getNode() {

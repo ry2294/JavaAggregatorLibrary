@@ -6,7 +6,7 @@ class Parameter<K> {
 		this.parameter = parameter;
 	}
 	
-	public K getParameter() {
+	public K getNode() {
 		return parameter;
 	}
 }

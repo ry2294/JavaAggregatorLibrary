@@ -22,30 +22,50 @@ class Graph {
 		parameters.put(parameter.getClass(), new Parameter<K>(parameter));
 	}
 	
-	public void injectDependencies() {
-		
-	}
-	
-	public void injectParameters() throws IllegalArgumentException, IllegalAccessException {
+	public void injectContainers() throws IllegalArgumentException, IllegalAccessException {
 		for(Task<? extends Runnable> task : vertices.values()) {
-			injectParametersInsideVertex(task.getNode());
+			injectContainersInsideVertex(task);
 		}
 	}
 	
-	private <K extends Runnable> void injectParametersInsideVertex(K node) 
+	private void injectContainersInsideVertex(Task<? extends Runnable> task) 
 			throws IllegalArgumentException, IllegalAccessException {
-		Class<? extends Runnable> cls = node.getClass();
+		Class<? extends Runnable> cls = task.getNode().getClass();
 		Field[] fields = cls.getDeclaredFields();
 		for(Field field : fields) {
 			if(field.getAnnotation(Param.class) != null && 
 					parameters.containsKey(field.getType())) {
-				if(!Modifier.isPublic(field.getModifiers())) {
-					field.setAccessible(true);
-					field.set(node, parameters.get(field.getType()).getParameter());
-					field.setAccessible(false);
-				} else
-					field.set(node, parameters.get(field.getType()).getParameter());
+				assignParameterToField(field, task);
+			}
+			if(field.getAnnotation(Dependency.class) != null && 
+					vertices.containsKey(field.getType())) {
+				assignDependencyToField(field, task);
 			}
 		}
+	}
+	
+	private void assignParameterToField(Field field, Task<? extends Runnable> task) 
+			throws IllegalArgumentException, IllegalAccessException {
+		if(!Modifier.isPublic(field.getModifiers())) {
+			field.setAccessible(true);
+			field.set(task.getNode(), parameters.get(field.getType()).getNode());
+			field.setAccessible(false);
+		} else field.set(task.getNode(), parameters.get(field.getType()).getNode());
+	}
+	
+	private void assignDependencyToField(Field field, Task<? extends Runnable> task) 
+			throws IllegalArgumentException, IllegalAccessException {
+		if(!Modifier.isPublic(field.getModifiers())) {
+			field.setAccessible(true);
+			field.set(task.getNode(), vertices.get(field.getType()).getNode());
+			field.setAccessible(false);
+		} else field.set(task.getNode(), vertices.get(field.getType()).getNode());
+		task.addInDegree(vertices.get(field.getType()).getNode().getClass());
+		constructEdge(vertices.get(field.getType()), task);
+	}
+	
+	private void constructEdge(Task<? extends Runnable> source, Task<? extends Runnable> destination) {
+		source.addOutDegree(destination.getNode().getClass());
+		destination.addInDegree(source.getNode().getClass());
 	}
 }
