@@ -2,12 +2,12 @@ package com.aggregatorlibrary;
 
 import java.util.HashSet;
 
-class Task {
+class Task<K extends Runnable> {
 	private HashSet<Class<? extends Runnable>> inDegree;
 	private HashSet<Class<? extends Runnable>> outDegree;
-	private Runnable node;
+	private K node;
 	
-	public Task(Runnable node){
+	public Task(K node){
 		this.node = node;
 		inDegree = new HashSet<Class<? extends Runnable>>();
 		outDegree = new HashSet<Class<? extends Runnable>>();
@@ -21,7 +21,7 @@ class Task {
 		return outDegree;
 	}
 
-	public Runnable getNode() {
+	public K getNode() {
 		return node;
 	}
 }

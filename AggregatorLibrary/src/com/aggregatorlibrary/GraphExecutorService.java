@@ -11,6 +11,7 @@ class GraphExecutorService implements GraphExecutor {
 	
 	@Override
 	public void execute(Graph graph) {
+		executor.shutdown();
 	}
 
 }

@@ -11,6 +11,7 @@ import org.tweet.aggregator.tweetbot.tasks.StoreTweetInDynamoDB;
 
 import com.aggregatorlibrary.Aggregator;
 import com.aggregatorlibrary.Aggregators;
+import com.aggregatorlibrary.exceptions.CyclicGraphException;
 
 @Path("/tweet")
 public class TweetResource {
@@ -18,10 +19,23 @@ public class TweetResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createTweet(Tweet tweet) {
-		Aggregator aggregator = Aggregators.newAggregatorService();
-		aggregator.execute();
-		System.out.println("Tweet id = " + tweet.getId());
 		StoreTweetInDynamoDB storeTweetTask = new StoreTweetInDynamoDB();
+		Aggregator aggregator = Aggregators.newAggregatorService();
+		aggregator.addParameter(new String("Dynamo DB"));
+		aggregator.addNode(storeTweetTask);
+		try {
+			aggregator.execute();
+		} catch (CyclicGraphException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Tweet id = " + tweet.getId());
 		storeTweetTask.run();
 		return Response.ok().build();
 	}

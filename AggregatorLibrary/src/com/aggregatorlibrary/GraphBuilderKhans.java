@@ -5,14 +5,12 @@ import com.aggregatorlibrary.exceptions.CyclicGraphException;
 class GraphBuilderKhans {
 
 	public static void buildGraph(Graph graph) 
-			throws CyclicGraphException {
-		injectDependecies(graph);
+			throws CyclicGraphException, IllegalArgumentException, IllegalAccessException {
+		graph.injectParameters();
+		graph.injectDependencies();
 		constructEdges(graph);
 		if(isGraphCyclic(graph))
 			throw new CyclicGraphException();
-	}
-	
-	private static void injectDependecies(Graph graph) {
 	}
 	
 	private static void constructEdges(Graph graph) {
