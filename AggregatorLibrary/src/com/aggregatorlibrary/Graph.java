@@ -2,12 +2,12 @@ package com.aggregatorlibrary;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Collection;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 
 class Graph {
-	ConcurrentHashMap<Class<? extends Runnable>, Task<? extends Runnable>> vertices;
-	ConcurrentHashMap<Class<?>, Parameter<?>> parameters;
+	private ConcurrentHashMap<Class<? extends Runnable>, Task<? extends Runnable>> vertices;
+	private ConcurrentHashMap<Class<?>, Parameter<?>> parameters;
 	
 	public Graph() {
 		vertices = new ConcurrentHashMap<Class<? extends Runnable>, Task<? extends Runnable>>();
@@ -22,7 +22,19 @@ class Graph {
 		parameters.put(parameter.getClass(), new Parameter<K>(parameter));
 	}
 	
-	public void injectContainers() throws IllegalArgumentException, IllegalAccessException {
+	public Collection<Task<? extends Runnable>> getTasks() {
+		return vertices.values();
+	}
+	
+	public Task<? extends Runnable> getTask(Class<? extends Runnable> cls) {
+		return vertices.get(cls);
+	}
+	
+	public int size() {
+		return vertices.size();
+	}
+	
+	public void constructGraph() throws IllegalArgumentException, IllegalAccessException {
 		for(Task<? extends Runnable> task : vertices.values()) {
 			injectContainersInsideVertex(task);
 		}

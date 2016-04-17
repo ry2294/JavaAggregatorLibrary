@@ -13,16 +13,30 @@ class Task<K extends Runnable> {
 		outDegree = new HashSet<Class<? extends Runnable>>();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public HashSet<Class<? extends Runnable>> getInDegree() {
-		return inDegree;
+		HashSet<Class<? extends Runnable>> hashSet = new HashSet<Class<? extends Runnable>>();
+		hashSet = (HashSet<Class<? extends Runnable>>) inDegree.clone();
+		return hashSet;
 	}
 	
 	public void addInDegree(Class<? extends Runnable> cls) {
 		inDegree.add(cls);
 	}
+	
+	public void removeInDegree(Class<? extends Runnable> cls) {
+		inDegree.remove(cls);
+	}
+	
+	public boolean isInDegreeEmpty() {
+		return inDegree.isEmpty();
+	}
 
+	@SuppressWarnings("unchecked")
 	public HashSet<Class<? extends Runnable>> getOutDegree() {
-		return outDegree;
+		HashSet<Class<? extends Runnable>> hashSet = new HashSet<Class<? extends Runnable>>();
+		hashSet = (HashSet<Class<? extends Runnable>>) outDegree.clone();
+		return hashSet;
 	}
 	
 	public void addOutDegree(Class<? extends Runnable> cls) {

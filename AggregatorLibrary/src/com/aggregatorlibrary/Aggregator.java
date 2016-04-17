@@ -1,5 +1,7 @@
 package com.aggregatorlibrary;
 
+import java.util.concurrent.ExecutionException;
+
 import com.aggregatorlibrary.exceptions.CyclicGraphException;
 
 public interface Aggregator {
@@ -7,5 +9,5 @@ public interface Aggregator {
 	
 	public <K extends Runnable> void addNode(K node);
 	
-	public void execute() throws CyclicGraphException, IllegalArgumentException, IllegalAccessException;
+	public void execute() throws CyclicGraphException, IllegalArgumentException, IllegalAccessException, InterruptedException, ExecutionException;
 }

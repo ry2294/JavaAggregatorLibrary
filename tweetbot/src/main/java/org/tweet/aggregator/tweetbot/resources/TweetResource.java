@@ -1,5 +1,7 @@
 package org.tweet.aggregator.tweetbot.resources;
 
+import java.util.concurrent.ExecutionException;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -7,8 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.tweet.aggregator.tweetbot.model.Tweet;
-import org.tweet.aggregator.tweetbot.tasks.SentimentAnalysis;
-import org.tweet.aggregator.tweetbot.tasks.StoreTweetInDynamoDB;
+import org.tweet.aggregator.tweetbot.tasks.*;
 
 import com.aggregatorlibrary.Aggregator;
 import com.aggregatorlibrary.Aggregators;
@@ -20,26 +21,27 @@ public class TweetResource {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createTweet(Tweet tweet) {
-		StoreTweetInDynamoDB storeTweetTask = new StoreTweetInDynamoDB();
-		SentimentAnalysis analysis = new SentimentAnalysis();
 		Aggregator aggregator = Aggregators.newAggregatorService();
-		aggregator.addParameter(new String("Dynamo DB"));
-		aggregator.addNode(analysis);
-		aggregator.addNode(storeTweetTask);
+		aggregator.addNode(new A());
+		aggregator.addNode(new B());
+		aggregator.addNode(new C());
+		D d = new D();
+		aggregator.addNode(d);
 		try {
 			aggregator.execute();
 		} catch (CyclicGraphException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
+		System.out.println("d value = " + d.getD());
 		System.out.println("Tweet id = " + tweet.getId());
-		storeTweetTask.run();
 		return Response.ok().build();
 	}
 }

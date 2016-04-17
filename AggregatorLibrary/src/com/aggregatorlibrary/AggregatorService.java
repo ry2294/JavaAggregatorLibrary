@@ -1,5 +1,7 @@
 package com.aggregatorlibrary;
 
+import java.util.concurrent.ExecutionException;
+
 import com.aggregatorlibrary.exceptions.CyclicGraphException;
 
 class AggregatorService implements Aggregator {
@@ -20,7 +22,8 @@ class AggregatorService implements Aggregator {
 	}
 
 	@Override
-	public void execute() throws CyclicGraphException, IllegalArgumentException, IllegalAccessException {
+	public void execute() 
+			throws CyclicGraphException, IllegalArgumentException, IllegalAccessException, InterruptedException, ExecutionException {
 		GraphBuilderKhans.buildGraph(graph);
 		GraphExecutor graphExecutor = GraphExecutors.newCachedThreadPool();
 		graphExecutor.execute(graph);
