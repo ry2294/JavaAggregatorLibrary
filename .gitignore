@@ -5,6 +5,8 @@ Servers/
 .project
 .settings/
 .recommenders/
+RemoteSystemsTempFiles/
+Icon
 
 # Java
 */bin/

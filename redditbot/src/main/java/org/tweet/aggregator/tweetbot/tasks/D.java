@@ -11,6 +11,13 @@ public class D implements Runnable {
 	
 	private String d;
 	
+	public D() {}
+	
+	public D(B b, C c) {
+		this.b = b;
+		this.c = c;
+	}
+	
 	@Override
 	public void run() {
 		System.out.println("Running Class D with b value = " + b.getB() + " c value = " + c.getC());

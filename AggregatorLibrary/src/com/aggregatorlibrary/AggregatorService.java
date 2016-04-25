@@ -29,4 +29,8 @@ class AggregatorService implements Aggregator {
 		graphExecutor.execute(graph);
 	}
 
+	@Override
+	public void addTasks(Runnable... node) {
+	}
+
 }

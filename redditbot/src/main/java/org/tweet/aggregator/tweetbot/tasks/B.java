@@ -8,6 +8,12 @@ public class B implements Runnable {
 	
 	private String b;
 	
+	public B() {}
+	
+	public B(A a) {
+		this.a = a;
+	}
+	
 	@Override
 	public void run() {
 		System.out.println("Running Class B with value = " + a.getA());

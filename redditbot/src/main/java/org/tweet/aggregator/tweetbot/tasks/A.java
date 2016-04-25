@@ -2,6 +2,11 @@ package org.tweet.aggregator.tweetbot.tasks;
 
 public class A implements Runnable {
 	private String a;
+	
+	public A() {
+		
+	}
+	
 	@Override
 	public void run() {
 		System.out.println("Running Class A");
