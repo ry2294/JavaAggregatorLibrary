@@ -30,7 +30,10 @@ class AggregatorService implements Aggregator {
 	}
 
 	@Override
-	public void addTasks(Runnable... node) {
+	public void addNodes(Runnable... nodes) {
+		for(Runnable node : nodes) {
+			addNode(node);
+		}
 	}
 
 }
