@@ -19,16 +19,13 @@ public class TweetResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createTweet(Tweet tweet) {
 		Aggregator aggregator = Aggregators.newAggregatorService();
-		aggregator.addNodes(new A(), new B(), new C());
-		D d = new D();
-		aggregator.addNode(d);
+		aggregator.addNodes(new RecordTime(), new SentimentAnalysis(), new StoreInDynamoDB());
+		aggregator.addParameter(tweet);
 		try {
 			aggregator.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("d value = " + d.getD());
-		System.out.println("Tweet id = " + tweet.getId());
 		return Response.ok().build();
 	}
 }
