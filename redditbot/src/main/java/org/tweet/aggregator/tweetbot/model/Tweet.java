@@ -1,18 +1,10 @@
 package org.tweet.aggregator.tweetbot.model;
 
 public class Tweet {
-	private String id, text, lat, lon, time;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+	private String tweetid, text, lat, lon, time;
 	
 	public String toString() {
-		return id + " " + text + " " + lat + "" + lon;
+		return tweetid + " " + text + " " + lat + "" + lon;
 	}
 
 	public String getText() {
@@ -45,5 +37,13 @@ public class Tweet {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getTweetid() {
+		return tweetid;
+	}
+
+	public void setTweetid(String tweetid) {
+		this.tweetid = tweetid;
 	}
 }

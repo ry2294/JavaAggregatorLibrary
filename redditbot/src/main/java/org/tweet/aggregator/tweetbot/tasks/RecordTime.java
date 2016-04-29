@@ -31,7 +31,7 @@ public class RecordTime implements Runnable {
 		long endTime = System.currentTimeMillis() - startTime;
 		JSONObject tweet = new JSONObject();
 		tweet.put("table", "javatweet");
-		tweet.put("tweetid", this.tweet.getId());
+		tweet.put("tweetid", this.tweet.getTweetId());
 		tweet.put("text", this.tweet.getText());
 		tweet.put("lat", this.tweet.getLat());
 		tweet.put("lon", this.tweet.getLon());
