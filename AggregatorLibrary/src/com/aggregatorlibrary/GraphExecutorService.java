@@ -25,6 +25,10 @@ class GraphExecutorService implements GraphExecutor {
 		runDependentTasks(graph);
 	}
 	
+	/**
+	 * Returns the set of tasks which can be run independently for the given graph.
+	 * It takes a Graph object and returns an Queue of Tasks objects, specifying which of them can run in parallel.
+	 */ 
 	private Queue<Task<? extends Runnable>> getIndependentTasks(Graph graph) {
 		Queue<Task<? extends Runnable>> queue = new ArrayDeque<Task<? extends Runnable>>();
 		for(Task<? extends Runnable> task : graph.getTasks()) {
@@ -34,6 +38,9 @@ class GraphExecutorService implements GraphExecutor {
 		return queue;
 	}
 	
+	/**
+	 * Runs the set of tasks for which this task is dependent on.
+	 */ 
 	private void runDependentTasks(Graph graph) throws InterruptedException, ExecutionException {
 		for(int t = 0; t < graph.size(); t++) {
 			Future<Task<? extends Runnable>> future = completionService.take();
