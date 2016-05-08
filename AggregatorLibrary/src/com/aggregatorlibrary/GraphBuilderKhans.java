@@ -8,7 +8,10 @@ import java.util.Queue;
 import com.aggregatorlibrary.exceptions.CyclicGraphException;
 
 class GraphBuilderKhans {
-
+	
+	/**
+	 * Constructs the dependency graph for the given nodes by checking their dependencies.
+	 */ 
 	public static void buildGraph(Graph graph) 
 			throws CyclicGraphException, IllegalArgumentException, IllegalAccessException {
 		graph.constructGraph();
@@ -16,6 +19,9 @@ class GraphBuilderKhans {
 			throw new CyclicGraphException();
 	}
 	
+	/**
+	 * The function isGraphCyclic takes the Graph object and checks if there is cycle in the dependency graph.
+	 */ 
 	private static boolean isGraphCyclic(Graph graph) {
 		HashMap<Class<? extends Runnable>, HashSet<Class<? extends Runnable>>> indegrees = 
 				new HashMap<Class<? extends Runnable>, HashSet<Class<? extends Runnable>>>();
@@ -28,6 +34,9 @@ class GraphBuilderKhans {
 		return topologicalSort(indegrees, outdegrees, graph.size());
 	}
 	
+	/**
+	 * Performs topological sort and returns if total number of vertices is equal or not to the number of visited vertices
+	 */ 
 	private static boolean topologicalSort(
 			HashMap<Class<? extends Runnable>, HashSet<Class<? extends Runnable>>> indegrees, 
 			HashMap<Class<? extends Runnable>, HashSet<Class<? extends Runnable>>> outdegrees,
