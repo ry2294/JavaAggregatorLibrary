@@ -12,8 +12,8 @@ import org.tweet.aggregator.tweetbot.tasks.*;
 import com.aggregatorlibrary.Aggregator;
 import com.aggregatorlibrary.Aggregators;
 
-@Path("/tweet")
-public class TweetResource {
+@Path("/aggregator")
+public class AggregatorResource {
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

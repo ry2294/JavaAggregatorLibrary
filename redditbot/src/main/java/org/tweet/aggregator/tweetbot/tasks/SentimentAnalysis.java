@@ -14,6 +14,13 @@ public class SentimentAnalysis implements Runnable {
 	private int polarity = -1;
 	@Param
 	Tweet tweet;
+	
+	public SentimentAnalysis(Tweet tweet) {
+		this.tweet = tweet;
+	}
+	
+	public SentimentAnalysis() {
+	}
 
 	@Override
 	public void run() {

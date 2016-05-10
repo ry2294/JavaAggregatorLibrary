@@ -25,22 +25,25 @@ public class RecordTime implements Runnable {
 	public RecordTime() {
 		startTime = System.currentTimeMillis();
 	}
+	
+	public RecordTime(Tweet tweet, SentimentAnalysis sentiment, StoreInDynamoDB dynamoDB) {
+		startTime = System.currentTimeMillis();
+		this.tweet = tweet; this.sentiment = sentiment; this.dynamoDB = dynamoDB;
+	}
 
 	@Override
 	public void run() {
 		long endTime = System.currentTimeMillis() - startTime;
 		JSONObject tweet = new JSONObject();
-		tweet.put("table", "javatweet");
-		tweet.put("tweetid", this.tweet.getTweetid());
+		tweet.put("table", this.tweet.getTable());
+		tweet.put("id", this.tweet.getTweetid());
 		tweet.put("text", this.tweet.getText());
-		tweet.put("lat", this.tweet.getLat());
-		tweet.put("lon", this.tweet.getLon());
 		tweet.put("time", String.valueOf(endTime));
 		tweet.put("sentiment", String.valueOf(sentiment.getPolarity()));
 		
 		try {
 			HttpResponse<JsonNode> jsonResponse = Unirest
-					.post("https://tweetmap-ry2294.c9users.io/time")
+					.post("http://redditbot.us-west-2.elasticbeanstalk.com/time")
 					.header("accept", "application/json")
 					.header("Content-Type", "application/json")
 					.body(tweet)
