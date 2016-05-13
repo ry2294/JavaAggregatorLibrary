@@ -37,17 +37,61 @@ We have created the following classes A, B, C and D representing the above class
 
 1. Import the package com.aggregatorlibrary by using the following statement.
 
-`import com.aggregatorlibrary.*;`
+    `import com.aggregatorlibrary.*;`
 
-2. Create an instance of the AggregatorService by invoking the newAggregatorService() method of the Aggregators Factory.
+2. Define classes for each of the different types of Tasks you want to perform. Each of these classes must implement Runnable interface. Each node in the graph must be represented by an object.
 
-3. Input the tasks, in our case A, B, C and D, to the Aggregator by invoking the addTasks() method. This method takes variable arguments, hence there is no limit on the number of tasks added.
+3. Specify dependencies for each task inside it's class definition. For developers to specify dependencies among tasks we have created @Dependency Annotation using Java Annotations. Developers need to insert this annotation in each task which has dependencies above their references to these dependencies. The following figure describes the usage of @Dependency in Task B which has a dependency on Task A.
 
-4. Finally, invoke the execute() method of the Aggregator to start the execution of the tasks.
+    ```Java
+    public class B implements Runnable{
+        // Would recommend definig all the dependencies of the class initially by making use of @Dependency.
+        // You would require to specify @Dependecy annotation for each dependency.
+        @Dependency
+        private A a;
+        
+        // Define your class variables.
+        
+        
+        // Define your constructors
+        // If you would like you can assign object for object a also by passing it through the constructor.
+        
+        
+        @Override
+        public void run(){
+            // Your code logic for this task. What actions you want this task to perform.
+            // For example I may just want my task to print the name of the task.
+            // System.out.println("Running class B");
+        
+        }
+        
+        // Other method defenitions for this class, can define other helper methods or any method if you want.
+        
+    }
+    ```
 
-<img height="200" src="https://raw.githubusercontent.com/ry2294/JavaAggregatorLibrary/master/images/aggregatorservice.png" />
+4. Create an instance of the AggregatorService by invoking the newAggregatorService() method of the Aggregators Factory.
 
-### Dependency Identification and Injection
-For developers to specify dependencies among tasks we have created @Dependency Annotation using Java Annotations. Developers need to insert this annotation in each task which has dependencies above their references to these dependencies. The following figure describes the usage of @Dependency in Task B which has a dependency on Task A.
+5. Input the tasks, in our case A, B, C and D, to the Aggregator by invoking the addTasks() method. This method takes variable arguments, hence there is no limit on the number of tasks added.
 
-<img height="400" src="https://raw.githubusercontent.com/ry2294/JavaAggregatorLibrary/master/images/dependencyinjection.png" />
+6. Finally, invoke the execute() method of the Aggregator to start the execution of the tasks.
+
+    `Making use of the aggregator service`
+    ```Java
+        public void callAggregator() throws Exception{
+            // The aggregator service throws Exception in case of any error like presence of Cycles in dependency graph.
+            // So it is important to habdle exceptions with care.
+            
+            // Define the aggregator by creating a new Aggregator Service
+            Aggregator aggregator = Aggregators.newAggregatorService();
+            
+            // add tasks to the aggregtor service, you can do this by adding one task at a time using addNode() or you can 
+            // multiple tasks at same time using addNodes().
+            aggregator.addNodes(new A(), new B(), new C(), new D());
+            
+            // Call the execute function to start execution of tasks
+            aggregator.execute();
+            
+        }
+    ```
+
