@@ -95,6 +95,6 @@ We have created the following classes A, B, C and D representing the above class
         }
     ```
     
-    `Example of usage of Aggregator Service for a REST Application can be done similar to:`
-    `https://github.com/ry2294/JavaAggregatorLibrary/blob/master/redditbot/src/main/java/org/tweet/aggregator/tweetbot/resources/AggregatorResource.java`
+    `Example usage of Aggregator Service for a REST Application can be done similar to:`
+    https://github.com/ry2294/JavaAggregatorLibrary/blob/master/redditbot/src/main/java/org/tweet/aggregator/tweetbot/resources/AggregatorResource.java
 
