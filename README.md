@@ -47,4 +47,4 @@ We have created the following classes A, B, C and D representing the above class
 ### Dependency Identification and Injection
 For developers to specify dependencies among tasks we have created @Dependency Annotation using Java Annotations. Developers need to insert this annotation in each task which has dependencies above their references to these dependencies. The following figure describes the usage of @Dependency in Task B which has a dependency on Task A.
 
-<img src="https://github.com/ry2294/JavaAggregatorLibrary/tree/master/images/dependencyinjection.png" />
+<img src="https://raw.githubusercontent.com/ry2294/JavaAggregatorLibrary/master/images/dependencyinjection.png" />
