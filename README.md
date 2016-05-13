@@ -30,7 +30,7 @@ Below are the steps to import our Java Aggregator Library into any Eclipse Java 
 # Tutorial
 Let us take an example to illustrate on how to use our library. In the following figure, we can see four tasks A, B, C and D with their dependencies. Task A is independent and can execute first, whereas Tasks B and C depend on A since they use Task A’s output. Finally Task D is dependent on outputs of Tasks B and C and hence it has to execute last.
 
-![dependency Graph](https://github.com/ry2294/JavaAggregatorLibrary/tree/master/images/dependencygraph.png)
+<img height="300" src="https://raw.githubusercontent.com/ry2294/JavaAggregatorLibrary/master/images/dependencygraph.png" />
 
 We have created the following classes A, B, C and D representing the above classes respectively. Now to input these tasks to our AggregatorLibrary, clients must follow the following steps which are also illustrated in the following figure with a code example.
 1. Import the package com.aggregatorlibrary by using the following statement.
@@ -42,7 +42,7 @@ We have created the following classes A, B, C and D representing the above class
 
 4. Finally, invoke the execute() method of the Aggregator to start the execution of the tasks.
 
-![aggregator Service](https://github.com/ry2294/JavaAggregatorLibrary/tree/master/images/aggregatorservice.png)
+<img height="300" src="https://raw.githubusercontent.com/ry2294/JavaAggregatorLibrary/master/images/aggregatorservice.png" />
 
 ### Dependency Identification and Injection
 For developers to specify dependencies among tasks we have created @Dependency Annotation using Java Annotations. Developers need to insert this annotation in each task which has dependencies above their references to these dependencies. The following figure describes the usage of @Dependency in Task B which has a dependency on Task A.
