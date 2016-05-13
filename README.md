@@ -13,6 +13,7 @@ This GitHub repository contains source code for our Java Aggregator Library in "
 
 # Importing AggregatorLibrary into Eclipse
 Below are the steps to import our Java Aggregator Library into any Eclipse Java Web Project.
+
 1. Download AggregatorLibrary.jar file from the following link : https://github.com/ry2294/JavaAggregatorLibrary/blob/master/AggregatorLibrary/AggregatorLibrary.jar
 
 2. Open Eclipse and select your project to which you want to import our Aggregator Library.
@@ -33,6 +34,7 @@ Let us take an example to illustrate on how to use our library. In the following
 <img height="300" src="https://raw.githubusercontent.com/ry2294/JavaAggregatorLibrary/master/images/dependencygraph.png" />
 
 We have created the following classes A, B, C and D representing the above classes respectively. Now to input these tasks to our AggregatorLibrary, clients must follow the following steps which are also illustrated in the following figure with a code example.
+
 1. Import the package com.aggregatorlibrary by using the following statement.
 
 `import com.aggregatorlibrary.*;`
