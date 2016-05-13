@@ -34,6 +34,7 @@ Let us take an example to illustrate on how to use our library. In the following
 
 We have created the following classes A, B, C and D representing the above classes respectively. Now to input these tasks to our AggregatorLibrary, clients must follow the following steps which are also illustrated in the following figure with a code example.
 1. Import the package com.aggregatorlibrary by using the following statement.
+
 `import com.aggregatorlibrary.*;`
 
 2. Create an instance of the AggregatorService by invoking the newAggregatorService() method of the Aggregators Factory.
